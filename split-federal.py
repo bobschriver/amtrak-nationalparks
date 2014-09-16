@@ -16,9 +16,12 @@ for feature in features:
 
     if bureau != None and state != None and state != 'AK' and state != 'HI':
         if bureau not in bureaus:
-            bureaus[bureau] = open(bureau + '.geojson', 'w')
-       
-        dump(feature, bureaus[bureau])
-        bureaus[bureau].write('\n')
+            feature_collection = {}
+            feature_collection["type"] = 'FeatureCollection'
+            feature_collection["features"] = []
+            bureaus[bureau] = feature_collection
+            
+        bureaus[bureau]["features"].append(feature) 
 
-
+for bureau,feature_collection in bureaus.items():
+    dump(feature_collection, open(bureau + '.geojson', 'w'))
