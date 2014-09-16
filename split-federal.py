@@ -8,14 +8,13 @@ json_data = load(json_file)
 
 features = json_data["features"]
 
-pprint(features[0])
-
 bureaus = {}
 
 for feature in features:
     bureau = feature["properties"]["AGBUR"]
-    
-    if bureau != None:
+    state = feature["properties"]["STATE"]
+
+    if bureau != None and state != None and state != 'AK' and state != 'HI':
         if bureau not in bureaus:
             bureaus[bureau] = open(bureau + '.geojson', 'w')
        
