@@ -7,22 +7,10 @@
 	<script src="amtrak-data.js"></script>
 	<script src="nps-data.js"></script>
 	<script src="fs-data.js"></script>
-	<!--><script src="blm-data.js"></script><!-->
 	<link href="style.css" rel="stylesheet">
 </head>
 <body>
 	<div id="map"></div>
-	<script>
-		var map = L.map('map');
-		var osm = new L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-
-		var amtrak_data = L.geoJson(amtrak_geojson).addTo(map);
-		var nps_data = L.geoJson(nps_geojson).addTo(map);
-		var fs_data = L.geoJson(fs_geojson).addTo(map);
-		//var blm_data = L.geoJson(blm_geojson).addTo(map);
-		map.setView(new L.LatLng(0,0), 10);
-		map.addLayer(osm);
-		map.fitBounds(blm_data.getBounds());
-	</script>
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
