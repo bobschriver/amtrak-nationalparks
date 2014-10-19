@@ -31,7 +31,7 @@ function amtrak_on_each_feature(feature, layer) {
 }
 
 function federal_on_each_feature(feature, layer) {
-	layer.bindPopup(feature.properties.NAME1);
+	layer.bindPopup(feature.properties.NAME1 + '<br>' + feature.properties.closest_station + '<br>' + feature.properties.closest_station_distance);
 }
 
 function nps_style(feature) {
