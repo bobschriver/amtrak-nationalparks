@@ -5,7 +5,7 @@ function init() {
 	
 	var amtrak_data = L.geoJson(amtrak_geojson, {
 		pointToLayer: amtrak_point_to_layer,
-		onEachFeature: amtrak_on_each_feature
+	    	onEachFeature: amtrak_on_each_feature
 	});
 	
 	var nps_data = L.geoJson(nps_geojson, {
@@ -28,7 +28,15 @@ function init() {
 }
 
 function amtrak_point_to_layer(feature_data, latlng) {
-	return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon: 'icon-coffee', color: 'orange', iconColor: 'black'})})
+	return L.marker(latlng, {icon: new L.Icon.Default
+		({
+			iconSize: [12, 20],
+			iconAnchor: [2, 7],
+			popupAncor: [0, 15],
+			shadowSize: [20, 12],
+			shadowAnchor: [2, 0],
+		})
+	});
 }
 
 function amtrak_on_each_feature(feature, layer) {
@@ -46,7 +54,7 @@ function nps_style(feature) {
 }
 
 function fs_style(feature) {
-	return {'color': '#3333FF',
+	return {'color': '#000099',
 		'weight': 1};
 }
 
