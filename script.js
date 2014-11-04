@@ -30,10 +30,10 @@ function init() {
 function amtrak_point_to_layer(feature_data, latlng) {
 	return L.marker(latlng, {icon: new L.Icon.Default
 		({
-			iconSize: [12, 20],
+			iconSize: [28, 42],
 			iconAnchor: [2, 7],
-			popupAncor: [0, 15],
-			shadowSize: [20, 12],
+			popupAncor: [0, 28],
+			shadowSize: [42, 28],
 			shadowAnchor: [2, 0],
 		})
 	});
