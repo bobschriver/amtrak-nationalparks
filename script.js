@@ -4,6 +4,7 @@ function init() {
 
 	
 	var amtrak_data = L.geoJson(amtrak_geojson, {
+		pointToLayer: amtrak_point_to_layer,
 		onEachFeature: amtrak_on_each_feature
 	});
 	
@@ -24,6 +25,10 @@ function init() {
 	fs_data.addTo(map);
 		
 	map.fitBounds(fs_data.getBounds());
+}
+
+function amtrak_point_to_layer(feature_data, latlng) {
+	return L.marker(latlng, {icon: L.AwesomeMarkers.icon({icon: 'icon-coffee', color: 'orange', iconColor: 'black'})})
 }
 
 function amtrak_on_each_feature(feature, layer) {
