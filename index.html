@@ -1,17 +1,17 @@
 <!doctype html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width" charset="UTF-8">
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
-	<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-	<link rel="stylesheet" href="leaflet.awesome-markers.css"/>
-	<script src="leaflet.awesome-markers.js"></script>
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
 	
+	<link href="style.css" rel="stylesheet"/>
+	
+	<!-- Kind of a hackey-hack, should probably load these dynamically--!>	
 	<script src="amtrak-data.js"></script>
 	<script src="nps-data.js"></script>
 	<script src="fs-data.js"></script>
-	<link href="style.css" rel="stylesheet">
 </head>
 <body>
 	<div id="map"></div>
