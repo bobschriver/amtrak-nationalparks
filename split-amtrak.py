@@ -18,8 +18,10 @@ for feature in features:
         feature_collection["type"] = 'FeatureCollection'
         feature_collection["features"] = []
         station_types[station_type] = feature_collection
-            
-    station_types[station_type]["features"].append(feature) 
+    
+    feature['properties']['title'] = feature['properties']['STN_NAME']
+
+    station_types[station_type]['features'].append(feature) 
 
 for station_type,feature_collection in station_types.items():
     dump(feature_collection, open(station_type + '.geojson', 'w'))
