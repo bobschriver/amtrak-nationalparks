@@ -14,35 +14,34 @@ amtrak_features = amtrak_json_data['features']
 amtrak_stations = []
 
 for amtrak_feature in amtrak_features:
-	amtrak_point = Point(amtrak_feature['geometry']['coordinates'])
-	amtrak_name = amtrak_feature['properties']['STN_NAME']
-	amtrak_stations.append({'station_name':amtrak_name, 'coordinates':amtrak_point})
+    amtrak_point = Point(amtrak_feature['geometry']['coordinates'])
+    amtrak_name = amtrak_feature['properties']['STN_NAME']
+    amtrak_stations.append({'station_name':amtrak_name, 'coordinates':amtrak_point})
 
 park_bureaus = ['nps', 'fs']
 
 for park_bureau in park_bureaus:
-	park_json_file = open(park_bureau + '.geojson')
-	park_json_data = load(park_json_file)
-	
-	park_features = park_json_data['features']
+    park_json_file = open(park_bureau + '.geojson')
+    park_json_data = load(park_json_file)
 
-	for park_feature in park_features:
-		coordinates = chain.from_iterable(park_feature['geometry']['coordinates'])
+    park_features = park_json_data['features']
 
-		park_polygon = Polygon(map(tuple, coordinates))
+    for park_feature in park_features:
+        coordinates = chain.from_iterable(park_feature['geometry']['coordinates'])
 
-	
-		min_distance = sys.maxsize
-		min_name = ""
-		for amtrak_station in amtrak_stations:
-			distance = park_polygon.distance(amtrak_station['coordinates'])
+        park_polygon = Polygon(map(tuple, coordinates))
 
-			if distance < min_distance:
-				min_distance = distance
-				min_name = amtrak_station['station_name']
+        min_distance = sys.maxsize
+        min_name = ""
+        for amtrak_station in amtrak_stations:
+            distance = park_polygon.distance(amtrak_station['coordinates'])
 
-		park_feature['properties']['closest_station'] = min_name
-		park_feature['properties']['closest_station_distance'] = min_distance
+            if distance < min_distance:
+                min_distance = distance
+                min_name = amtrak_station['station_name']
 
-	dump(park_json_data, open(park_bureau + '_with_stations.geojson', 'w'))
-		
+            park_feature['properties']['title'] = park_feature['properties']['NAME1']
+            park_feature['properties']['description'] = "Closest Station: " + min_name + "\n"
+            park_feature['properties']['description'] = "Distance: " + (min_distance * 1000) + " miles"
+
+    dump(park_json_data, open(park_bureau + '_with_stations.geojson', 'w'))
