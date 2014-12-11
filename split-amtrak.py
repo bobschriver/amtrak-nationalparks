@@ -20,6 +20,11 @@ for feature in features:
         station_types[station_type] = feature_collection
     
     feature['properties']['title'] = feature['properties']['STN_NAME']
+    
+    #Mapbox styling
+    feature['properties']['marker-color'] = '#FF8533'
+    feature['properties']['marker-size'] = 'small'
+    feature['properties']['marker-symbol'] = 'rail'
 
     station_types[station_type]['features'].append(feature) 
 

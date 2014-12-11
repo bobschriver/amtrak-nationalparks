@@ -19,8 +19,9 @@ for amtrak_feature in amtrak_features:
     amtrak_stations.append({'station_name':amtrak_name, 'coordinates':amtrak_point})
 
 park_bureaus = ['nps', 'fs']
+bureau_colors = ['#006600', '#3333ff']
 
-for park_bureau in park_bureaus:
+for park_bureau,bureau_color in zip(park_bureaus, bureau_colors):
     park_json_file = open(park_bureau + '.geojson')
     park_json_data = load(park_json_file)
 
@@ -42,6 +43,13 @@ for park_bureau in park_bureaus:
 
             park_feature['properties']['title'] = park_feature['properties']['NAME1']
             park_feature['properties']['description'] = "Closest Station: " + min_name + "\n"
-            park_feature['properties']['description'] = "Distance: " + (min_distance * 1000) + " miles"
+	    
+	    park_distance = "{:.2f}".format(min_distance * 1000)
+            park_feature['properties']['description'] = "Distance: " + park_distance + " miles"
+
+	    # Mapbox style information 
+	    park_feature['properties']['stroke_width'] = 1
+	    park_feature['properties']['fill'] = bureau_color
+	    park_feature['properties']['fill_opacity'] = 0.5
 
     dump(park_json_data, open(park_bureau + '_with_stations.geojson', 'w'))
