@@ -41,15 +41,19 @@ for park_bureau,bureau_color in zip(park_bureaus, bureau_colors):
                 min_distance = distance
                 min_name = amtrak_station['station_name']
 
-            park_feature['properties']['title'] = park_feature['properties']['NAME1']
-            park_feature['properties']['description'] = "Closest Station: " + min_name + "\n"
-	    
-	    park_distance = "{:.2f}".format(min_distance * 1000)
-            park_feature['properties']['description'] = "Distance: " + park_distance + " miles"
 
-	    # Mapbox style information 
-	    park_feature['properties']['stroke_width'] = 1
-	    park_feature['properties']['fill'] = bureau_color
-	    park_feature['properties']['fill_opacity'] = 0.5
+	park_name = park_feature['properties']['NAME1']
+	park_feature['properties'] = {}
+
+        park_feature['properties']['title'] = park_name
+        park_feature['properties']['description'] = "Closest Station: " + min_name + "\n"
+	    
+	park_distance = "{:.2f}".format(min_distance * 1000)
+        park_feature['properties']['description'] += "Distance: " + park_distance + " miles"
+
+	# Mapbox style information 
+	park_feature['properties']['stroke_width'] = 1
+	park_feature['properties']['fill'] = bureau_color
+	park_feature['properties']['fill_opacity'] = 0.5
 
     dump(park_json_data, open(park_bureau + '_with_stations.geojson', 'w'))
