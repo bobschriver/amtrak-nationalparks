@@ -4,23 +4,32 @@ function init() {
 	var map = L.mapbox.map('map', 'bobschriver.kc56keio').setView([43.639, -116.184], 6);
 	
 	var amtrak_data = L.geoJson(amtrak_geojson, {
-		pointToLayer: amtrak_point_to_layer,
-		onEachFeature: amtrak_on_each_feature
+		pointToLayer: L.mapbox.marker.style,
+	    	style: geojson_style,
+		onEachFeature: geojson_popup
 	});
 	
 	var nps_data = L.geoJson(nps_geojson, {
-		onEachFeature: federal_on_each_feature,
-	    	style: nps_style
+		onEachFeature: geojson_popup,
+	    	style: geojson_style
 	});
 		
 	var fs_data = L.geoJson(fs_geojson, {
-		onEachFeature: federal_on_each_feature,
-	    	style: fs_style
+		onEachFeature: geojson_popup,
+	    	style: geojson_style
 	});
 	
 	amtrak_data.addTo(map);
 	nps_data.addTo(map);
 	fs_data.addTo(map);		
+}
+
+function geojson_style(feature) {
+	return feature.properties;
+}
+
+function geojson_popup(feature, layer) {
+	return layer.bindPopup(feature.properties.description);
 }
 
 //TODO: put this in the geojson
