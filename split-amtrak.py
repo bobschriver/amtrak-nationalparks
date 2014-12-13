@@ -19,7 +19,7 @@ for feature in features:
         feature_collection["features"] = []
         station_types[station_type] = feature_collection
     
-    feature['properties']['title'] = feature['properties']['STN_NAME']
+    feature['properties']['description'] = feature['properties']['STN_NAME']
     
     #Mapbox styling
     feature['properties']['marker-color'] = '#FF8533'
