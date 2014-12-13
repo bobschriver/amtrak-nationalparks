@@ -55,8 +55,8 @@ for park_bureau,bureau_color in zip(park_bureaus, bureau_colors):
         park_feature['properties']['description'] += "Distance: " + park_distance + " miles"
 
 	# Mapbox style information 
-	park_feature['properties']['width'] = 1
+	park_feature['properties']['weight'] = 1
 	park_feature['properties']['fillColor'] = bureau_color
-	park_feature['properties']['fillOpacity'] = 0.8
+	park_feature['properties']['fillOpacity'] = 0.2
 
     dump(park_json_data, open(park_bureau + '_with_stations.geojson', 'w'))
